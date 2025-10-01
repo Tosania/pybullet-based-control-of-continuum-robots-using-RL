@@ -6,12 +6,15 @@ import os
 import matplotlib.pyplot as plt
 from tensorboard.backend.event_processing import event_accumulator
 os.environ["QT_QPA_PLATFORM"] = "offscreen"
-
-
 class ReportGenerator:
     def __init__(self, model_name, total_timesteps, judge,
                  control_mode, device, net_arch,
-                 reward_fn, done_fn,
+                 reward_fn, done_fn,n_env,seed,
+                 learning_rate, batch_size, n_steps,n_epochs,best_reward,
+                 buffer_size,
+                 learning_starts,
+                 train_freq,
+                 model_type,
                  log_dir="./ppo_log/PPO_2E7", output_path="report.pdf"):
 
         self.model_name = model_name
@@ -20,17 +23,29 @@ class ReportGenerator:
         self.device = device
         self.net_arch = net_arch
         self.reward_fn = reward_fn
+        self.seed=seed
+        self.learning_rate=learning_rate
+        self.batch_size=batch_size
+        self.n_steps=n_steps
+        self.best_reward=best_reward
+        self.buffer_size=buffer_size
+        self.train_freq=train_freq
+        self.learning_starts=learning_starts
+        self.model_type=model_type
+        self.n_env=n_env
+        self.n_epochs=n_epochs
         self.done_fn = done_fn
+        self.num=0
         self.output_path = output_path
         self.log_dir = log_dir
         self.judge = judge
         self.timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
 
-    def plot_tensorboard_scalar(self, tag="rollout/ep_rew_mean", output_path="reward_curve.png"):
+    def plot_tensorboard_scalar(self, tag, output_path="./temp/reward_curve.png"):
+        output_path=f"./temp/reward_curve_{self.num}.png"
+        self.num+=1
         ea = event_accumulator.EventAccumulator(self.log_dir)
         ea.Reload()
-        print("📋 可用的 Tags:")
-        print(ea.Tags()["scalars"])
         if tag not in ea.Tags()["scalars"]:
             print(f"⚠️ Tag '{tag}' not found in logs.")
             return None
@@ -64,11 +79,22 @@ class ReportGenerator:
         rows = [
             ("Model Name", self.model_name),
             ("Time", self.timestamp),
+            ("Model_Type",self.model_type),
+            ("seed",self.seed),
             ("Timesteps", f"{self.total_timesteps}"),
             ("Control Mode", str(self.control_mode)),
             ("Device", self.device),
             ("Network Arch", str(self.net_arch)),
-            ("Mean Error", self.judge)
+            ("Average Error", self.judge),
+            ("batch",self.batch_size),
+            ("buffer_size",self.buffer_size),
+            ("train_freq",self.train_freq),
+            ("learning_starts",self.learning_starts),
+            ("n_steps",self.n_steps),
+            ("n_epochs",self.n_epochs),
+            ("learning_rate",str(self.learning_rate)),
+            ("n_env",self.n_env),
+            ("best_reward",str(self.best_reward))
         ]
 
         for name, value in rows:
@@ -116,13 +142,15 @@ class ReportGenerator:
         pdf.ln(5)
         pdf.set_font("Arial", 'B', size=14)
         pdf.cell(200, 10, txt="Training Reward Curve", ln=True)
-
-        image_path = self.plot_tensorboard_scalar()
-        if image_path and os.path.exists(image_path):
-            pdf.image(image_path, w=180)
-        else:
-            pdf.set_font("Arial", size=12)
-            pdf.cell(200, 10, txt="can't load reward", ln=True)
-
+        ea = event_accumulator.EventAccumulator(self.log_dir)
+        ea.Reload()
+        for i in ea.Tags()["scalars"]:
+          print(i)
+          image_path = self.plot_tensorboard_scalar(tag=i)
+          if image_path and os.path.exists(image_path):
+              pdf.image(image_path, w=180)
+          else:
+              pdf.set_font("Arial", size=12)
+              pdf.cell(200, 10, txt="can't load reward", ln=True)
         pdf.output(self.output_path)
         print(f"PDF报告已生成: {self.output_path}")

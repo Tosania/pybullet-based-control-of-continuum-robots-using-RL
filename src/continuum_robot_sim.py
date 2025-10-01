@@ -14,7 +14,7 @@ class arm_joint:
     direction: int      # 第二个数字（可以是浮点数）
 
 class ContinuumRobotSim:
-    def __init__(self, urdf_path="continuum_robot.urdf",connection_mode=p.DIRECT,controlmode=1):
+    def __init__(self, urdf_path="./source/continuum_robot.urdf",connection_mode=p.DIRECT,controlmode=1):
         self.urdf_path = urdf_path
         self.control_mode=controlmode          #1表示位置控制，0表示速度控制
         self.robot_id = None
@@ -37,6 +37,37 @@ class ContinuumRobotSim:
         p.setGravity(0, 0, 0, physicsClientId=self.physics_client)
 
         self.load_robot()
+    def getstate(self):
+      state = [
+          self.theta_1, self.alpha_1,
+          self.theta_2, self.alpha_2,
+          self.theta_3, self.alpha_3,
+          self.base_theta, self.length
+      ]
+      # 添加每段的3个link的坐标
+      selected_links = [
+          "link_0_3", "link_0_6", "link_0_9",
+          "link_1_3", "link_1_6", "link_1_9",
+          "link_2_3", "link_2_6", "link_2_9",
+      ]
+
+      for link_name in selected_links:
+          link_index = self._get_link_index_by_name(link_name)
+          if link_index != -1:
+              pos, _ = p.getLinkState(self.robot_id, link_index)[:2]
+              state.extend(pos)
+          else:
+              state.extend([0, 0, 0])  # 出错时填默认值
+      state.extend(self.get_end_effector_position())
+      return state
+
+    def _get_link_index_by_name(self, name):
+        for i in range(self.num_joints):
+            joint_info = p.getJointInfo(self.robot_id, i, physicsClientId=self.physics_client)
+            if joint_info[12].decode("utf-8") == name:
+                return i
+        return -1
+
     def keshi_ball(self,position):
     # 清除旧的可视化目标点（如果有）
         if hasattr(self, "sphere_id"):  # 检查是否已有小球
@@ -56,9 +87,9 @@ class ContinuumRobotSim:
         self.robot_id = p.loadURDF(self.urdf_path, [0, 0, 0], useFixedBase=True, physicsClientId=self.physics_client)
         self.num_joints = p.getNumJoints(self.robot_id, physicsClientId=self.physics_client)
 
-        print(f" 机器人加载完成，共有 {self.num_joints} 个关节")
+        #print(f" 机器人加载完成，共有 {self.num_joints} 个关节")
         self.print_joint_info()
-        self.print_arm_info()
+        #self.print_arm_info()
         for i in range(p.getNumJoints(self.robot_id)):
           p.changeDynamics(self.robot_id, i, linearDamping=4, angularDamping=4, physicsClientId=self.physics_client)
           
@@ -80,7 +111,7 @@ class ContinuumRobotSim:
         for i in range(self.num_joints):
             joint_info = p.getJointInfo(self.robot_id, i, physicsClientId=self.physics_client)
             joint_name = joint_info[1].decode('utf-8') if isinstance(joint_info[1], bytes) else joint_info[1]
-            print(f"Joint {i}: {joint_name} - Type: {joint_info[2]}")
+           # print(f"Joint {i}: {joint_name} - Type: {joint_info[2]}")
             
             if joint_name.startswith("joint_0_0"):
               self.controlled_joints_arm[0].direction=i
@@ -191,8 +222,6 @@ class ContinuumRobotSim:
         self.set_joint_positions(0,base_theta)
         p.resetJointState(self.robot_id, jointIndex=1,targetValue=length, physicsClientId=self.physics_client)
         p.stepSimulation(physicsClientId=self.physics_client)
-    def getstate(self):
-       return [self.theta_1,self.alpha_1,self.theta_2,self.alpha_2,self.theta_3,self.alpha_3,self.base_theta,self.length]
     def run_simulation(self):
         while self.running:
             #if self.control_mode==0:
@@ -202,6 +231,7 @@ class ContinuumRobotSim:
     
     def close(self):
       self.running = False  # ✅ 停止仿真
-      p.disconnect()
+      if p.isConnected(self.physics_client):
+        p.disconnect(physicsClientId=self.physics_client)
 if __name__ == "__main__":
     sim=ContinuumRobotSim()

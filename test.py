@@ -2,9 +2,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # 定义 x 区间和 y 值
-x = np.linspace(0 ,5, 100000)  # 生成1000个点
+x = np.linspace(0 ,2, 100000)  # 生成1000个点
 def f(distance):
-    reward = -distance + np.exp(-distance**2) * 5
+    reward = -distance + np.exp(-120 * distance**2) * 5
     return reward
 
 y = f(x)  # 目标函数

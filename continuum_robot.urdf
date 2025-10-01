@@ -1,0 +1,2096 @@
+<?xml version="1.0"?>
+<robot name="continuum_robot">
+
+  <link name="base_link">
+    <visual>
+      <origin xyz="0 0 1.0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.6 0.6 2"/>
+      </geometry>
+      <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+    
+  </link>
+  <link name="extend_link">
+    <visual>
+      <origin xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.1" length="0"/>
+      </geometry>
+      <material name="green">
+        <color rgba="0 1 0 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <!-- 软体部分的滑动关节 -->
+  <joint name="extend_joint" type="prismatic">
+    <parent link="base_link"/>
+    <child link="extend_link"/>
+    <origin xyz="0 0 2"/>
+    <axis xyz="0 0 1"/>  <!-- 让软体部分沿 Z 轴伸缩 -->
+    <limit lower="-2" upper="0" effort="50.0" velocity="2.0"/>
+  </joint>
+  
+  <link name="base_rotation">
+    <visual>
+      <origin xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="0" length="0"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.5 0.5 0.5 1"/>
+      </material>
+    </visual>
+  </link>
+<link name="link_0_help">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0" length="0"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0" length="0"/>
+        </geometry>
+      </collision>
+    </link>
+  
+    <joint name="joint_0_0" type="continuous">
+      <parent link="extend_link"/>
+      <child link="link_0_help"/>
+      <origin xyz="0 0 0"/>
+      <axis xyz="0 0 1"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint>
+  
+    <link name="link_0_1">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_0_1">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_0_1" type="continuous">
+      <parent link="link_0_help"/>
+      <child link="link_0_1"/>
+      <origin xyz="0 0 0.00015"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_0_1">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_0_1" type="fixed">
+      <parent link="link_0_1"/>
+      <child link="linkwai_0_1"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_0_2">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_0_2">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_0_2" type="continuous">
+      <parent link="link_0_1"/>
+      <child link="link_0_2"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_0_2">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_0_2" type="fixed">
+      <parent link="link_0_2"/>
+      <child link="linkwai_0_2"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_0_3">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_0_3">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_0_3" type="continuous">
+      <parent link="link_0_2"/>
+      <child link="link_0_3"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_0_3">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_0_3" type="fixed">
+      <parent link="link_0_3"/>
+      <child link="linkwai_0_3"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_0_4">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_0_4">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_0_4" type="continuous">
+      <parent link="link_0_3"/>
+      <child link="link_0_4"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_0_4">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_0_4" type="fixed">
+      <parent link="link_0_4"/>
+      <child link="linkwai_0_4"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_0_5">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_0_5">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_0_5" type="continuous">
+      <parent link="link_0_4"/>
+      <child link="link_0_5"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_0_5">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_0_5" type="fixed">
+      <parent link="link_0_5"/>
+      <child link="linkwai_0_5"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_0_6">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_0_6">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_0_6" type="continuous">
+      <parent link="link_0_5"/>
+      <child link="link_0_6"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_0_6">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_0_6" type="fixed">
+      <parent link="link_0_6"/>
+      <child link="linkwai_0_6"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_0_7">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_0_7">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_0_7" type="continuous">
+      <parent link="link_0_6"/>
+      <child link="link_0_7"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_0_7">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_0_7" type="fixed">
+      <parent link="link_0_7"/>
+      <child link="linkwai_0_7"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_0_8">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_0_8">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_0_8" type="continuous">
+      <parent link="link_0_7"/>
+      <child link="link_0_8"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_0_8">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_0_8" type="fixed">
+      <parent link="link_0_8"/>
+      <child link="linkwai_0_8"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_0_9">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_0_9">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_0_9" type="continuous">
+      <parent link="link_0_8"/>
+      <child link="link_0_9"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_0_9">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_0_9" type="fixed">
+      <parent link="link_0_9"/>
+      <child link="linkwai_0_9"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_0_10">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_0_10">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_0_10" type="continuous">
+      <parent link="link_0_9"/>
+      <child link="link_0_10"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_0_10">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_0_10" type="fixed">
+      <parent link="link_0_10"/>
+      <child link="linkwai_0_10"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  <link name="link_1_help">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0" length="0"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0" length="0"/>
+        </geometry>
+      </collision>
+    </link>
+  
+    <joint name="joint_1_0" type="continuous">
+      <parent link="link_0_10"/>
+      <child link="link_1_help"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="0 0 1"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint>
+  
+    <link name="link_1_1">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_1_1">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_1_1" type="continuous">
+      <parent link="link_1_help"/>
+      <child link="link_1_1"/>
+      <origin xyz="0 0 0.00015"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_1_1">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_1_1" type="fixed">
+      <parent link="link_1_1"/>
+      <child link="linkwai_1_1"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_1_2">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_1_2">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_1_2" type="continuous">
+      <parent link="link_1_1"/>
+      <child link="link_1_2"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_1_2">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_1_2" type="fixed">
+      <parent link="link_1_2"/>
+      <child link="linkwai_1_2"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_1_3">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_1_3">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_1_3" type="continuous">
+      <parent link="link_1_2"/>
+      <child link="link_1_3"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_1_3">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_1_3" type="fixed">
+      <parent link="link_1_3"/>
+      <child link="linkwai_1_3"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_1_4">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_1_4">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_1_4" type="continuous">
+      <parent link="link_1_3"/>
+      <child link="link_1_4"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_1_4">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_1_4" type="fixed">
+      <parent link="link_1_4"/>
+      <child link="linkwai_1_4"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_1_5">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_1_5">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_1_5" type="continuous">
+      <parent link="link_1_4"/>
+      <child link="link_1_5"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_1_5">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_1_5" type="fixed">
+      <parent link="link_1_5"/>
+      <child link="linkwai_1_5"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_1_6">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_1_6">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_1_6" type="continuous">
+      <parent link="link_1_5"/>
+      <child link="link_1_6"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_1_6">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_1_6" type="fixed">
+      <parent link="link_1_6"/>
+      <child link="linkwai_1_6"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_1_7">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_1_7">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_1_7" type="continuous">
+      <parent link="link_1_6"/>
+      <child link="link_1_7"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_1_7">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_1_7" type="fixed">
+      <parent link="link_1_7"/>
+      <child link="linkwai_1_7"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_1_8">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_1_8">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_1_8" type="continuous">
+      <parent link="link_1_7"/>
+      <child link="link_1_8"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_1_8">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_1_8" type="fixed">
+      <parent link="link_1_8"/>
+      <child link="linkwai_1_8"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_1_9">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_1_9">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_1_9" type="continuous">
+      <parent link="link_1_8"/>
+      <child link="link_1_9"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_1_9">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_1_9" type="fixed">
+      <parent link="link_1_9"/>
+      <child link="linkwai_1_9"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_1_10">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_1_10">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_1_10" type="continuous">
+      <parent link="link_1_9"/>
+      <child link="link_1_10"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_1_10">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_1_10" type="fixed">
+      <parent link="link_1_10"/>
+      <child link="linkwai_1_10"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  <link name="link_2_help">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0" length="0"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0" length="0"/>
+        </geometry>
+      </collision>
+    </link>
+  
+    <joint name="joint_2_0" type="continuous">
+      <parent link="link_1_10"/>
+      <child link="link_2_help"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="0 0 1"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint>
+  
+    <link name="link_2_1">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_2_1">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_2_1" type="continuous">
+      <parent link="link_2_help"/>
+      <child link="link_2_1"/>
+      <origin xyz="0 0 0.00015"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_2_1">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_2_1" type="fixed">
+      <parent link="link_2_1"/>
+      <child link="linkwai_2_1"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_2_2">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_2_2">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_2_2" type="continuous">
+      <parent link="link_2_1"/>
+      <child link="link_2_2"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_2_2">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_2_2" type="fixed">
+      <parent link="link_2_2"/>
+      <child link="linkwai_2_2"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_2_3">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_2_3">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_2_3" type="continuous">
+      <parent link="link_2_2"/>
+      <child link="link_2_3"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_2_3">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_2_3" type="fixed">
+      <parent link="link_2_3"/>
+      <child link="linkwai_2_3"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_2_4">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_2_4">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_2_4" type="continuous">
+      <parent link="link_2_3"/>
+      <child link="link_2_4"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_2_4">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_2_4" type="fixed">
+      <parent link="link_2_4"/>
+      <child link="linkwai_2_4"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_2_5">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_2_5">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_2_5" type="continuous">
+      <parent link="link_2_4"/>
+      <child link="link_2_5"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_2_5">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_2_5" type="fixed">
+      <parent link="link_2_5"/>
+      <child link="linkwai_2_5"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_2_6">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_2_6">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_2_6" type="continuous">
+      <parent link="link_2_5"/>
+      <child link="link_2_6"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_2_6">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_2_6" type="fixed">
+      <parent link="link_2_6"/>
+      <child link="linkwai_2_6"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_2_7">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_2_7">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_2_7" type="continuous">
+      <parent link="link_2_6"/>
+      <child link="link_2_7"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_2_7">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_2_7" type="fixed">
+      <parent link="link_2_7"/>
+      <child link="linkwai_2_7"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_2_8">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_2_8">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_2_8" type="continuous">
+      <parent link="link_2_7"/>
+      <child link="link_2_8"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_2_8">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_2_8" type="fixed">
+      <parent link="link_2_8"/>
+      <child link="linkwai_2_8"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_2_9">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_2_9">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_2_9" type="continuous">
+      <parent link="link_2_8"/>
+      <child link="link_2_9"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_2_9">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_2_9" type="fixed">
+      <parent link="link_2_9"/>
+      <child link="linkwai_2_9"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  
+    <link name="link_2_10">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <mass value="0.1"/>
+        <origin xyz="0 0 0"/>
+        <inertia ixx="0.01" iyy="0.01" izz="0.01" ixy="0" ixz="0" iyz="0"/>
+      </inertial> <link name="link_2_10">
+      <visual>
+        <origin xyz="0 0 0.05" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+        <material name="blue">
+          <color rgba="0 0 1 1"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.05" length="0.1"/>
+        </geometry>
+      </collision>
+    </link>
+    </link>
+
+    <joint name="joint_2_10" type="continuous">
+      <parent link="link_2_9"/>
+      <child link="link_2_10"/>
+      <origin xyz="0 0 0.1"/>
+      <axis xyz="1 0 0"/>
+      <limit effort="10.0" velocity="2.0"/>
+    </joint> <link name="linkwai_2_10">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+        <material name="blask">
+          <color rgba="0 0 0 0.5"/>
+        </material>
+      </visual>
+      <collision>
+        <geometry>
+          <cylinder radius="0.2" length="0.002"/>
+        </geometry>
+      </collision>
+    </link>
+     <joint name="jointwai_2_10" type="fixed">
+      <parent link="link_2_10"/>
+      <child link="linkwai_2_10"/>
+      <origin xyz="0 0 0.05"/>
+    </joint>
+  <!-- 添加底座旋转关节 -->
+  <joint name="base_joint" type="continuous">
+    <parent link="base_rotation"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0"/>
+    <axis xyz="0 1 0"/>  <!-- 让底座绕 y 轴旋转 -->
+    <limit effort="50.0" velocity="5.0"/>
+  </joint>
+   
+  <link name="end_link">
+    <visual>
+      <origin xyz="0 0 0"/>
+      <geometry>
+        <cylinder radius="0.1" length="0"/>
+      </geometry>
+      <material name="green">
+        <color rgba="0 1 0 1"/>
+      </material>
+    </visual>
+  </link>
+  <joint name="last_joint" type="fixed">
+    <parent link="link_2_10"/>
+    <child link="end_link"/>
+    <origin xyz="0 0 0.1"/>
+  </joint>
+  
+</robot>
